@@ -76,9 +76,11 @@ https://github.com/chassing/linux-sysadmin-interview-questions sayfasının tür
 * CTRL-c ne yapar?
   1. komuttan çıkar bir komut yürütülüyorsa buna basıp çıkabilirsin, aynı zamanda terminalde komut yazdıysan çalıştırmayacaksan silmeyede üşeniyorsan ctrl+c yap
 * /etc/services dosyanın içinde ne saklanır?
+  1. burda portların hangi protokol tarafından kullanıldığını söyleyen bir dosya vardır. bu dosyadaki örneğin ssh portunu değiştirmek ssh server'ın port numarasının değişmesine sebeb olmaz. Sadece ssh portunun hangisi olduğunu söyler mesela ufw allow ssh dersek bu dosyayı ufw okur ve ordaki portu erişime açar ama siz sshd_config den bu portu örneğin 2225 falan yaptıysanız ufw bu dosyayı okur ve 22 yi açar.
 * Standart çıkış ve hatayı Bash dilinde nasıl yeniden yönlendirirsin? (> /dev/null 2>&1)
+  1.  Ne demek istendiğini anlamadım sanırım ama anladığım manada cevaplarsam. stdout ve stderr çıktıları programın çalışması sırasında buffer'da tutulur ve buradan okunur. stdout ve stderr bir dosyaya yönledirmek mümkündür yukarıdaki ifade stderr stdout'a yönlendirir ve bunların ikisinide /dev/null'a yönlendirerek hiçbirmesajın gözükmemesi sağlanır. 
 * UNIX ile Linux arasındaki fark nedir?
-  1. unix dağıtımları ve linuxdağıtımları arasındaki farklılıklarmı kernel olarak unix ve linux`un farklılıklarındanmı bahsediyorsunuz işletim sistemi olarakmı linux dağıtımları ve linux kernel ilk unix`i örnek almıştır. Unix artık geliştirilmiyor ama unix`in açık kaynak kernel`ını bazı dağıtımların bünyesinde gelişmeye devam etmiştir. freebsd,openbsd gibi 
+  1. unix dağıtımları ve linuxdağıtımları arasındaki farklılıklarmı kernel olarak unix ve linux'un farklılıklarındanmı bahsediyorsunuz işletim sistemi olarakmı linux dağıtımları ve linux kernel ilk unix`i örnek almıştır. Unix artık geliştirilmiyor ama unix`in açık kaynak kernel`ını bazı dağıtımların bünyesinde gelişmeye devam etmiştir. freebsd,openbsd gibi 
 * Telnet ve SSH arasındaki fark nedir?
   1. Birinin iletişimi şifresiz diğerinin şifrelidir. İkiside ağ üzerinden veri aktarımı içindir.
 * Üç yük ortalamasını (three load averages) açıkla, neyi gösterirler?
@@ -103,13 +105,26 @@ https://github.com/chassing/linux-sysadmin-interview-questions sayfasının tür
   1. yine arkaplanda çalışır ama terminal kapatıldığında süreç sonlanır.
 * Paket filtreleme nedir, nasıl kullanılır?
 * Sanal bellek (virtual memory) nedir?
+  1. swap gibi disk`i bellek bittiğinde kullanabilir ama ram'i yönetebilir organize edebilir. ram'de veri yazılırken ram'in iyi organize edilememesinden kaynaklanan fazla ram kullanımı gibi sorunları çözer.
 * Swap nedir, ne için kullanılır?
   1. belleğin yetersiz geldiği durumlarda ram olarak disk`de bir alanı kullanma olayıdır. Zorunlu değildir.
 * A, NS, PTR, CNAME, MX kayıtları ne anlama gelir?
+  1. DNS kayıt türleridir. Farklı türlerdeki Domain adlarının çözümü için gerekli olan verilerdir. Her DNS kaydında bu verilerin tamamı girilmez ne tür bir kayıt yapılacaksa ona göre girilir.
 * Bilinen başka RR (resource record) var mı, nasıl kullanılırlar?
+  1. A,NS,PTR,CNAME,MX,TXT,SRV kayıt türleri var
+     - **A Kaydı (Address Record):** A kaydı, bir domain adının IP adresine bağlı olduğunu gösterir. A kaydı, bir domain adının web sitesine erişim sağlanması için kullanılır.
+     - **NS Kaydı (Name Server Record):** NS kaydı, bir domain adı için kullanılan name server'ları belirtir. Name server'lar, bir domain adının çözümü için kullanılır ve bir domain adının web sitesine erişim sağlanması için gereklidir.
+     - **PTR Kaydı (Pointer Record):** PTR kaydı, bir IP adresinin domain adına bağlı olduğunu gösterir. PTR kaydı, bir IP adresine ait domain adının çözümü için kullanılır.
+     - **CNAME Kaydı (Canonical Name Record):** CNAME kaydı, bir domain adının başka bir domain adına yönlendirildiğini gösterir. CNAME kaydı, bir domain adının birden fazla adresine erişim sağlanmasını sağlar.
+     - **MX Kaydı (Mail Exchange Record):** MX kaydı, bir domain adının kullanılan e-posta sunucusunu belirtir. MX kaydı, bir domain adına ait e-posta mesajlarının nerede tutulacağını ve nereden alınacağını belirtir.
+     - **TXT Kaydı (Text Record):** TXT kaydı, bir domain adı için özel bir veri içeren bir metin alanı sağlar. TXT kaydı, domain adına ait özel bilgi veya açıklama gibi verileri içerebilir.
+     - **SRV Kaydı (Service Record):** SRV kaydı, bir hizmetin nerede ve ne şekilde kullanılacağını belirtir. Örneğin, bir domain adı için bir SRV kaydı oluşturulduğunda, bu domain adına ait bir hizmetin nerede ve ne şekilde kullanılacağı belirtilir.
 * Split-Horizon DNS nedir?
+  1. Farklı DNS`lerde aynı sunucunun farklı kayıt türlerinde tutulması olayına verilen addır.
 * Sticky bit nedir?
+  1. dosya veya dizinin sahibi ve root dışında silinmesini önleyen bir yetkidir. chown +t ile verilir.
 * Immutable bitin dosya üzerindeki etkisi nedir?
+  1. immutable bit dosya veya dizin üzerinde değişiklik yapılmamasını söyleyen bir yetkidir root kullanıcısı tarafından verilip alınabilir bu bit chattr +i ile dosyaya tanımladıktan sonra root kullanıcısının bile bu dosya üzerinde değişiklik yapması mümkün değildir.
 * Hardlink ve sembolik link arasındaki fark nedir? Bunların kaynağını silinirse her iki durum içinde ne olur?
 * Inode nedir ve ne tür bilgiler tutar?
 * Dosya sistemi kontrolü sıradaki yeniden başlatma sürecinde nasıl zorlanır?
